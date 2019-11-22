@@ -15,7 +15,7 @@ const lex = gl.create({
   server: "https://acme-staging-v02.api.letsencrypt.org/directory",
   approveDomains: (opts, certs, cb) => {
     if (certs) {
-      opts.domains = ["iotapi2.sangsang.farm", "iotapi2.sangsang.farm"];
+      opts.domains = ["iotapi2.sangsang.farm", "www.iotapi2.sangsang.farm"];
     } else {
       opts.email = "jhlee@sangsang.farm";
       opts.agreeTos = true;
