@@ -29,23 +29,24 @@ const lex = gl.create({
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || "3000");
+var port = normalizePort(process.env.PORT || "80");
 app.set("port", port);
 
 /**
  * Create HTTP server.
  */
 
-var server = http.createServer(app);
 https
   .createServer(lex.httpsOptions, lex.middleware(app))
   .listen(process.env.SSL_PORT || 443);
+var server = http
+  .createServer(lex.middleware(require("redirect-https")()))
+  .listen(process.env.PORT || 80);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
 
