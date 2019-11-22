@@ -12,7 +12,7 @@ var gl = require("greenlock-express");
 const lex = gl.create({
   version: "draft-11", // 버전2
   configDir: "/etc/letsencrypt", // 또는 ~/letsencrypt/etc
-  server: "https://acme-staging-v02.api.letsencrypt.org/directory",
+  server: "https://acme-v02.api.letsencrypt.org/directory",
   approveDomains: (opts, certs, cb) => {
     if (certs) {
       opts.domains = ["iotapi2.sangsang.farm"];
