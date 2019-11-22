@@ -15,15 +15,15 @@ const lex = gl.create({
   server: "https://acme-staging-v02.api.letsencrypt.org/directory",
   approveDomains: (opts, certs, cb) => {
     if (certs) {
-      opts.domains = ["iotapi2.sangsang.farm", "www.iotapi2.sangsang.farm"];
+      opts.domains = ["iotapi2.sangsang.farm"];
     } else {
       opts.email = "jhlee@sangsang.farm";
       opts.agreeTos = true;
     }
     cb(null, { options: opts, certs });
   },
-  renewWithin: 81 * 24 * 60 * 60 * 1000,
-  renewBy: 80 * 24 * 60 * 60 * 1000
+  renewWithin: 60 * 1000,
+  renewBy: 60 * 1000
 });
 /**
  * Get port from environment and store in Express.
