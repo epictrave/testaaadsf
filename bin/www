@@ -22,8 +22,8 @@ const lex = gl.create({
     }
     cb(null, { options: opts, certs });
   },
-  renewWithin: 60 * 1000,
-  renewBy: 60 * 1000
+  renewWithin: 3 * 24 * 60 * 60 * 1000,
+  renewBy: 3 * 24 * 60 * 60 * 1000
 });
 /**
  * Get port from environment and store in Express.
