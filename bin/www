@@ -12,10 +12,15 @@ var gl = require("greenlock-express");
 const lex = gl.create({
   version: "draft-11", // 버전2
   configDir: "/etc/letsencrypt", // 또는 ~/letsencrypt/etc
-  server: "https://acme-v02.api.letsencrypt.org/directory",
+  server: "https://acme-v02.api.dletsencrypt.org/directory",
   approveDomains: (opts, certs, cb) => {
     if (certs) {
-      opts.domains = ["iotapi2.sangsang.farm"];
+      opts.domains = [
+        "iotapi2.sangsang.farm",
+        "www.sangsang.farm",
+        "sangsang.farm",
+        "iotapi.sangsang.farm"
+      ];
     } else {
       opts.email = "jhlee@sangsang.farm";
       opts.agreeTos = true;
@@ -39,14 +44,12 @@ app.set("port", port);
 https
   .createServer(lex.httpsOptions, lex.middleware(app))
   .listen(process.env.SSL_PORT || 443);
-var server = http
-  .createServer(lex.middleware(require("redirect-https")()))
-  .listen(process.env.PORT || 80);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
-
+server.listen(port);
 server.on("error", onError);
 server.on("listening", onListening);
 
