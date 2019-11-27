@@ -44,7 +44,10 @@ app.set("port", port);
 https
   .createServer(lex.httpsOptions, lex.middleware(app))
   .listen(process.env.SSL_PORT || 443);
-var server = http.createServer(app);
+var server = http
+  .createServer(lex.middleware(require("redirect-https")()))
+  .listen(process.env.PORT || 80);
+// var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
